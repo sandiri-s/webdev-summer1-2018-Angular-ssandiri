@@ -47,7 +47,7 @@ export class SectionViewerComponent implements OnInit {
       .then(() => {
         this.loadSections(this.courseId);
       }).then(() => {this.sectionName = "";
-      this.maxSeats = "";});
+      this.maxSeats = ""; this.seats = "";});
   }
 
   updateSection(newName, newSeats) {
@@ -58,12 +58,13 @@ export class SectionViewerComponent implements OnInit {
       .then(() => {
         this.loadSections(this.courseId);
       }).then(() => {this.sectionName="";
-      this.maxSeats="";});
+      this.maxSeats="";  this.seats = ""; });
   }
 
   editSection(section) {
     this.sectionName = section.name;
     this.maxSeats = section.maxSeats;
+    this.seats = section.seats;
     this.selectedSection = section;
   }
 

@@ -5,6 +5,7 @@
     <tr id ="wbdv-table-heading">
       <th>Name</th>
       <th>MaxSeats</th>
+      <th>Remaining</th>
       <th></th>
     </tr>
     <tr >
@@ -12,6 +13,8 @@
                  placeholder="Name of Section" /></td>
       <td><input [(ngModel)]="maxSeats"  class="form-control"
                  placeholder="Maximum Seats" /></td>
+      <td><input [(ngModel)]="seats"  class="form-control"
+                 placeholder="Remaining Seats" disabled/></td>
       <td><span class="float-right" style="white-space: nowrap">
 							 <i
                  class="fa-2x fa fa-plus "  (click)="createSection(sectionName,maxSeats)"></i> <i
@@ -22,6 +25,7 @@
     <tbody>
     <tr *ngFor="let section of sections"  >
       <td > {{section.name}}</td>
+      <td > {{section.maxSeats}} </td>
       <td > {{section.seats}} </td>
       <td ><span class="float-right"> <i
          class="fa-2x fa fa-minus-circle " (click)="deleteSection(section._id)" ></i>
