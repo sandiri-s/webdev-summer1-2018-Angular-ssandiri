@@ -32,6 +32,17 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  unroll(section) {
+    // alert(section._id);
+    this.sectionService
+      .unrollStudentInSection(section._id)
+      .then(() => {
+        this.sectionService
+          .findSectionsForStudent()
+          .then(sections => this.sections = sections );
+      });
+  }
+
   ngOnInit() {
     this.service
       .profile()

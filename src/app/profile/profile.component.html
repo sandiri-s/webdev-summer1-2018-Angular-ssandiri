@@ -20,12 +20,23 @@
 
   <h2>Sections ({{sections.length}})</h2>
 
-  <ul class="list-group">
-    <li *ngFor="let enrollment of sections" class="list-group-item">
-      {{enrollment.section.name}}
-      ({{enrollment.section.seats}})
-    </li>
-  </ul>
+
+  <div class="row">
+    <div *ngFor="let enrollment of sections" class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{enrollment.section.name}}</h5>
+          <p> Grade {{enrollment.grade}} </p>
+
+            <button (click)="unroll(enrollment.section)"
+                    class="btn btn-primary">Unroll</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
   <a (click)="logout()">Logout</a>
   <a routerLink="/home">Home</a>
