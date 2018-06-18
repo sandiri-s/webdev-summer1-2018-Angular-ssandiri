@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'course/:courseId', component: CourseViewerComponent },
   { path: 'user-admin', component: UserAdminComponent },
-  { path: 'course/:courseId/section', component: SectionViewerComponent },
+  { path: 'course/:courseId/section', component: UserAdminComponent },
   { path: 'course/:courseId/module/:moduleId', component: CourseViewerComponent },
   { path: 'course/:courseId/module/:moduleId/lesson/:lessonId', component: CourseViewerComponent },
   { path: '**', component: WhiteBoardComponent} // last

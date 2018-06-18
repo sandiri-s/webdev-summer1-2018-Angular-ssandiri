@@ -27,7 +27,8 @@ export class SectionViewerComponent implements OnInit {
     this
       .service
       .findSectionsForCourse(courseId)
-      .then(sections => this.sections = sections);
+      .then(sections => this.sections = sections).then(() => {this.sectionName = "";
+      this.maxSeats = "";});
   }
 
   deleteSection(sectionId) {
@@ -45,7 +46,8 @@ export class SectionViewerComponent implements OnInit {
       .createSection(this.courseId, sectionName, maxSeats)
       .then(() => {
         this.loadSections(this.courseId);
-      });
+      }).then(() => {this.sectionName = "";
+      this.maxSeats = "";});
   }
 
   updateSection(newName, newSeats) {
