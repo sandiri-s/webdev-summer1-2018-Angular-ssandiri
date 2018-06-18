@@ -1,6 +1,6 @@
 <div *ngFor="let widget of widgets">
-  <div [ngSwitch]="widget.widgetType">
-    <div *ngSwitchCase="'HeadingWidget'">
+  <div [ngSwitch]="widget.className">
+    <div *ngSwitchCase="'Heading'">
       <div [ngSwitch]="widget.size">
         <h1 *ngSwitchCase="'1'">{{widget.text}}</h1>
         <h2 *ngSwitchCase="'2'">{{widget.text}}</h2>

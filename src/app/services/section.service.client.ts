@@ -23,8 +23,15 @@ export class SectionServiceClient {
       .then(response => response.json());
   }
 
-  createSection(courseId, name, seats) {
-    const section = {courseId, name, seats};
+  deleteSection(sectionId) {
+    return fetch('http://localhost:4000/api/section' + '/' + sectionId, {
+      method: 'delete'
+    });
+  }
+
+  createSection(courseId, name, maxSeats) {
+    const seats = maxSeats;
+    const section = {courseId, name, maxSeats, seats};
     return fetch(this.SECTION_URL.replace('COURSEID', courseId), {
       method: 'post',
       body: JSON.stringify(section),
