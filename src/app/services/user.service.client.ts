@@ -52,16 +52,7 @@ export class UserServiceClient {
 
   findUsername(username) {
 
-    const credentials = {
-      username: username,
-    };
-    return fetch('http://localhost:4000/api/login', {
-      method: 'post',
-      body: JSON.stringify(credentials),
-      credentials: 'include',
-      headers: {
-        'content-type': 'application/json'
-      }
+    return fetch('http://localhost:4000/api/user/' + username + "/username" , {
     }).then(response => response.json());
   }
 }
