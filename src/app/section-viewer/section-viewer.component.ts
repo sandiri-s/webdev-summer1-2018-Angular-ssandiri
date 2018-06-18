@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SectionServiceClient} from "../services/section.service.client";
+import {Section} from "../models/section.model.client";
 
 @Component({
   selector: 'app-section-viewer',
@@ -20,7 +21,7 @@ export class SectionViewerComponent implements OnInit {
   seats = '';
   courseId = '';
   sections = [];
-  selectedSection = [];
+  selectedSection :Section;
   loadSections(courseId) {
     this.courseId = courseId;
     this
@@ -47,10 +48,21 @@ export class SectionViewerComponent implements OnInit {
       });
   }
 
-  edit(section) {
+  updateSection(newName, newSeats) {
+    const newRem = newSeats - this.selectedSection.maxSeats + this.selectedSection.seats;
+    this
+      .service
+      .updateSection(this.selectedSection._id, newName, newSeats, newRem)
+      .then(() => {
+        this.loadSections(this.courseId);
+      }).then(() => {this.sectionName="";
+      this.maxSeats="";});
+  }
+
+  editSection(section) {
     this.sectionName = section.name;
     this.maxSeats = section.maxSeats;
-    this.selectedSection = section._id;
+    this.selectedSection = section;
   }
 
   // enroll(section) {

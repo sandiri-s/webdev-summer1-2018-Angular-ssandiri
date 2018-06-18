@@ -41,4 +41,16 @@ export class SectionServiceClient {
       }
     });
   }
+
+  updateSection(sectionId, newName, newMax, newRem) {
+    const section = {id : sectionId, newName: newName, newMax:newMax, newRem:newRem};
+    return fetch('http://localhost:4000/api/section' + '/' + sectionId, {
+      method: 'put',
+      body: JSON.stringify(section),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
 }
