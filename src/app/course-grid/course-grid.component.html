@@ -1,13 +1,13 @@
 
 
-<div *ngIf="!logged ">
-<a routerLink="/login">Login</a>
-<a routerLink="/register">Register</a>
+<div class="nav-buttons" *ngIf="!logged ">
+<a class="btn btn-primary" routerLink="/login">Login</a>
+<a class="btn btn-primary" routerLink="/register">Register</a>
 </div>
 
-<div *ngIf="logged ">
-  <a routerLink="/profile">Profile</a>
-  <a (click)="logout()">Logout</a>
+<div class="nav-buttons" *ngIf="logged ">
+  <a class="btn btn-primary" routerLink="/profile">Profile</a>
+  <a class="btn btn-danger" (click)="logout()">Logout</a>
 </div>
 
 
@@ -37,7 +37,7 @@
         <a routerLink="/course/{{course.id}}"
            class="btn btn-primary">View Course</a>
         <Button (click)="enroll(course.id)"
-                class="btn btn-primary">Enroll</Button>
+                class="btn btn-primary enroll">Enroll</Button>
       </div>
     </div>
   </div>

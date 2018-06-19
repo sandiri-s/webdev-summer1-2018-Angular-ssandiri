@@ -1,12 +1,14 @@
 
-<div class="row">
+<div class="row container-fluid">
   <div class="col-4">
-    <a routerLink="/profile">Profile</a>
-    <a routerLink="/home">Home</a>
+    <div class="user-admin">
+    <a class="btn btn-primary" routerLink="/profile">Profile</a>
+      <a class="btn btn-primary" routerLink="/home">Home</a>
+    </div>
     <ul class="list-group">
       <li class="list-group-item active">Courses</li>
-      <li  *ngFor="let course of courses"
-          class="list-group-item wbdv">
+      <li [ngClass]="{'active': course.id == courseId}" *ngFor="let course of courses"
+          class="list-group-item wbdv ">
         <a routerLink="/course/{{course.id}}/section">
           {{course.title}}</a>
       </li>
