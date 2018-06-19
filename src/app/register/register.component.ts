@@ -16,19 +16,26 @@ export class RegisterComponent implements OnInit {
   password;
   password2;
   register(username, password, password2) {
-    this.service
-      .findUsername(username)
-      .then((usrname) => {
-        if (usrname !== null) {
-          alert("username is already taken");
-        }
-        else {
-          this.service
-            .createUser(username, password)
-            .then(() =>
-              this.router.navigate(['profile']));
-        }
-      });
+    if(password !== password2)
+    {
+     alert("passwords do not match");
+    }
+    else {
+
+      this.service
+        .findUsername(username)
+        .then((usrname) => {
+          if (usrname !== null) {
+            alert("username is already taken");
+          }
+          else {
+            this.service
+              .createUser(username, password)
+              .then(() =>
+                this.router.navigate(['profile']));
+          }
+        });
+    }
   }
 
 
