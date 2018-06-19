@@ -4,7 +4,7 @@
   <input [(ngModel)]="username"
          placeholder="username"
          class="form-control"/>
-  <input [(ngModel)]="password"
+  <input type="password" [(ngModel)]="password"
          placeholder="password"
          class="form-control"/>
   <button (click)="login(username, password)"
@@ -13,5 +13,5 @@
   </button>
 
   <a routerLink="/register">Register</a>
-  <a routerLink="/home">Home</a>
+  <a routerLink="/home" class="float-right">Home</a>
 </div>
