@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SectionServiceClient} from "../services/section.service.client";
 import {Section} from "../models/section.model.client";
+import {CourseServiceClient} from "../services/course.service.client";
 
 @Component({
   selector: 'app-section-viewer',
@@ -11,6 +12,7 @@ import {Section} from "../models/section.model.client";
 export class SectionViewerComponent implements OnInit {
 
   constructor(private service: SectionServiceClient,
+              private courseService: CourseServiceClient,
               private router: Router,
               private route: ActivatedRoute) {
     this.route.params.subscribe(params => this.loadSections(params['courseId']));
@@ -20,6 +22,7 @@ export class SectionViewerComponent implements OnInit {
   maxSeats= "";
   seats = '';
   courseId = '';
+  courseName='';
   sections = [];
   selectedSection :Section;
   loadSections(courseId) {
@@ -41,9 +44,18 @@ export class SectionViewerComponent implements OnInit {
   }
 
   createSection(sectionName, maxSeats) {
+    if(sectionName==="" ){
+
+      this.sectionName = this.courseName + " Section " + (this.sections.length + 1).toString();
+    }
+    if(this.maxSeats==="" ){
+
+      this.maxSeats = "50"
+    }
+
     this
       .service
-      .createSection(this.courseId, sectionName, maxSeats)
+      .createSection(this.courseId, this.sectionName, this.maxSeats)
       .then(() => {
         this.loadSections(this.courseId);
       }).then(() => {this.sectionName = "";
@@ -78,6 +90,7 @@ export class SectionViewerComponent implements OnInit {
   // }
 
   ngOnInit() {
+  this.courseService.findCourseById(this.courseId).then(course => {this.courseName = course.title});
   }
 
 }
