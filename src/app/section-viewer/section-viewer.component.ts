@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SectionServiceClient} from "../services/section.service.client";
 import {Section} from "../models/section.model.client";
 import {CourseServiceClient} from "../services/course.service.client";
+import {Course} from "../models/coruse.model.client";
 
 @Component({
   selector: 'app-section-viewer',
@@ -22,7 +23,7 @@ export class SectionViewerComponent implements OnInit {
   maxSeats= "";
   seats = '';
   courseId = '';
-  courseName='';
+  course: Course;
   sections = [];
   selectedSection :Section;
   loadSections(courseId) {
@@ -32,6 +33,7 @@ export class SectionViewerComponent implements OnInit {
       .findSectionsForCourse(courseId)
       .then(sections => this.sections = sections).then(() => {this.sectionName = "";
       this.maxSeats = "";});
+    this.courseService.findCourseById(this.courseId).then(course => {this.course = course});
   }
 
   deleteSection(sectionId) {
@@ -46,7 +48,7 @@ export class SectionViewerComponent implements OnInit {
   createSection(sectionName, maxSeats) {
     if(sectionName==="" ){
 
-      this.sectionName = this.courseName + " Section " + (this.sections.length + 1).toString();
+      this.sectionName = this.course.title + " Section " + (this.sections.length + 1).toString();
     }
     if(this.maxSeats==="" ){
 
@@ -60,6 +62,16 @@ export class SectionViewerComponent implements OnInit {
         this.loadSections(this.courseId);
       }).then(() => {this.sectionName = "";
       this.maxSeats = ""; this.seats = "";});
+  }
+  changeCourseType(courseId, contentType) {
+    this.courseService.findCourseById(courseId)
+      .then(course => this.course = course)
+      .then(() => {
+        this.course.courseType = contentType;
+        this.courseService.updateCourse(this.course)
+          .then(course =>
+            this.course = course);
+      })
   }
 
   updateSection(newName, newSeats) {
@@ -90,7 +102,7 @@ export class SectionViewerComponent implements OnInit {
   // }
 
   ngOnInit() {
-  this.courseService.findCourseById(this.courseId).then(course => {this.courseName = course.title});
+
   }
 
 }

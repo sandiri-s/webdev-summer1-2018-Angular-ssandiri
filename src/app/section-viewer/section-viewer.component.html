@@ -1,5 +1,20 @@
 <div  class="container">
-  <h1 id="title">Sections</h1>
+  <div class="row">
+  <h1 class="col-6" id="title">Sections</h1>
+  <div class="float-right nav-buttons">
+    <div *ngIf="course.courseType === 'public';">
+      <button (click)="changeCourseType(course.id, 'private')" class="btn btn-danger float-right">
+        make course private
+      </button>
+    </div>
+    <div *ngIf="course.courseType === 'private';">
+      <button (click)="changeCourseType(course.id, 'public')" class="float-right btn btn-success">
+        make course public
+      </button>
+    </div>
+  </div>
+
+
   <table class="table table-hover">
     <thead>
     <tr id ="wbdv-table-heading">

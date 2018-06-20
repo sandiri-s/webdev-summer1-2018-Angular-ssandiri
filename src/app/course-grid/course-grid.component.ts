@@ -57,7 +57,7 @@ else {
 
 
   ngOnInit() {
-    this.service.findAllCourses()
+    this.service.findPublicCourses()
       .then(courses => this.courses = courses);
 
 
